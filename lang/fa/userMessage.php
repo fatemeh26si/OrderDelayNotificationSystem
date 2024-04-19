@@ -21,6 +21,4 @@ return [
 
     ],
 
-//    'accepted_if' => 'زمانی که گزینه :other برابر :value است :attribute باید تایید شود',
-
 ];

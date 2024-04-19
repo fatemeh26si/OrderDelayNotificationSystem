@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('vendor_id');
             $table->integer('delivery_time');
             $table->timestamp('order_date');
-            $table->timestamp('delivered_date')->nullable();
+            $table->timestamp('delivered_date')->nullable(); //Finally filled by the system after really delivered
             $table->timestamps();
             $table->softDeletes();
 

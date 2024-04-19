@@ -39,7 +39,7 @@ class AssignDelayReportService
             return [
                 'success' => false,
                 'data' => null,
-                'message' => "شما در حال حاضر یک تاخیر در حال بررسی دارید و در حال حاضر سفارش دیگری به شما اختصاص نمی یابد."
+                'message' => __('agentMessage.delayed.agent_has_pending')
             ];
         }
 
@@ -54,14 +54,15 @@ class AssignDelayReportService
             return [
                 'success' => true,
                 'data' => $nextDelayReportInQueue,
-                'message' => "سفارشی به شما تخصیص یافت. لطفا در اسرع وقت  آنرا بررسی نمایید."
+                'message' => __('agentMessage.delayed.assign_to_agent_successfully')
+
             ];
 
         } else {
             return [
                 'success' => true,
                 'data' => null,
-                'message' => "سفارشی در صف تاخیر جهت بررسی وجود ندارد. لطفا چند دقیقه ی دیگر مجددا درخواست نمایید."
+                'message' => __('agentMessage.delayed.no_delay_exist'),
             ];
         }
     }

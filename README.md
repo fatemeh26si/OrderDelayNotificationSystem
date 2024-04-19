@@ -27,7 +27,7 @@ Also, change this parameter to set the project port:
 All times are in UTC timezone
 
 The project framework is Laravel 10
-### Run project
+### Run Project
 
 in the main path of project run:
 
@@ -45,7 +45,7 @@ When the "migrate" command is executed, tables created on database
 
 When the "db:seed" command is executed, a series of mock data is created for the use of APIs in the database
 
-## Using system
+## Using System
 open the following address in your browser:
 
 http://localhost:{PORT}
