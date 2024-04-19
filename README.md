@@ -23,7 +23,11 @@ Also, change this parameter to set the project port:
 
 - PORT={project_port}
 
-### run project
+#### *Note:
+All times are in UTC timezone
+
+The project framework is Laravel 10
+### Run project
 
 in the main path of project run:
 
@@ -39,14 +43,14 @@ after the containers created and started then execute the following commands in 
 
 When the "migrate" command is executed, tables created on database
 
-When the "db:seed" command is executed, a series of mock data is created for the use of Apis in the database
+When the "db:seed" command is executed, a series of mock data is created for the use of APIs in the database
 
-## using system
+## Using system
 open the following address in your browser:
 
 http://localhost:{PORT}
 
-There you can see the swagger of the project to try the desired Api separated by two tags "Agent" and "User".
+There you can see the swagger of the project to try the desired APIs separated by two tags "Agent" and "User".
  
 ### Submit Delay Report By User
 /api/v1/delay-report
