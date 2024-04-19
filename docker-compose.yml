@@ -1,0 +1,76 @@
+version: '3'
+services:
+
+  #PHP Service
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: digitalocean.com/php
+
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+    tty: true
+    environment:
+      SERVICE_NAME: app
+      SERVICE_TAGS: dev
+    working_dir: /var/www/html/app
+    networks:
+      - app-network
+    volumes:
+       - ./:/var/www/html/app
+       - ./docker_setting/php/local.ini:/usr/local/etc/php/conf.d/local.ini
+       - ./docker_setting/php/www.conf:/usr/local/etc/php-fpm.d/www.conf
+
+  #Nginx Service
+  webserver:
+    image: nginx
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+    tty: true
+    ports:
+      - "${PORT}:80"
+      # - "8004:80"
+    #  - "443:443"
+    networks:
+      - app-network
+    volumes:
+      - ./:/var/www/html/app
+      - ./docker_setting/nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf
+      - ./docker_setting/nginx/nginx.conf:/etc/nginx/nginx.conf
+
+  #Scheduler
+#  scheduler:
+#    image: digitalocean.com/php
+#    command: ./docker_setting/bin/run-scheduler.sh
+#    restart: unless-stopped
+#    logging:
+#      driver: "json-file"
+#      options:
+#        max-size: "50m"
+#    depends_on:
+#      - app
+#    working_dir: /var/www/html/app
+#    volumes:
+#      - ./:/var/www/html/app
+#      - ./docker_setting/php/local.ini:/usr/local/etc/php/conf.d/local.ini
+#      - ./docker_setting/php/www.conf:/usr/local/etc/php-fpm.d/www.conf
+#    networks:
+#      - app-network
+
+#Docker Networks
+networks:
+  app-network:
+    driver: bridge
+
+
+#Volumes
+volumes:
+  dbdata:
+    driver: local
