@@ -2,7 +2,7 @@
 
 ## Setup Steps
 
-First, Set write permission to the project folder.
+First, Set full permission to the project folder.
 
 Then, go to the main path of the project, where the "docker-compose.yml" file is located.
 
@@ -21,7 +21,7 @@ Fill in the following values according to the desired database:
 
 Also, change this parameter to set the project port:
 
-- PORT=9665
+- PORT={project_port}
 
 ### run project
 
@@ -32,6 +32,7 @@ in the main path of project run:
 after the containers created and started then execute the following commands in order:
 
 - docker compose exec app composer install
+- docker compose exec app php artisan key:generate
 - docker compose exec app php artisan optimize
 - docker compose exec app php artisan migrate 
 - docker compose exec app php artisan db:seed

@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Enums\DelayReportStatusEnum;
 
 return new class extends Migration
 {
@@ -13,12 +14,15 @@ return new class extends Migration
     {
         Schema::create('agent_delay_reports', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('agent_id');
-            $table->bigInteger('delay_report_id');
-            $table->string('status')->nullable();
+            $table->unsignedBigInteger('agent_id');
+            $table->unsignedBigInteger('delay_report_id');
+            $table->enum('status', [DelayReportStatusEnum::PENDING->value, DelayReportStatusEnum::CHECKED->value])->nullable();
             $table->text('description')->nullable();
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('agent_id')->references('id')->on('agents')->restrictOnDelete();
+            $table->foreign('delay_report_id')->references('id')->on('delay_reports')->restrictOnDelete();
         });
     }
 

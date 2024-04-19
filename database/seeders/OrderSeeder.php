@@ -39,7 +39,7 @@ class OrderSeeder extends Seeder
                 'order_number' => '100002',
                 'vendor_id' => 1,
                 'delivery_time' => 50,
-                'order_date' => now()->sub('30 minute'),
+                'order_date' => now()->sub('90 minute'),
             ]
         );
         $this->orderRepository->firstOrCreate(
@@ -62,8 +62,8 @@ class OrderSeeder extends Seeder
                 'id' => 4,
                 'order_number' => '100004',
                 'vendor_id' => 2,
-                'delivery_time' => 70,
-                'order_date' => now(),
+                'delivery_time' => 45,
+                'order_date' => now()->sub('60 minute'),
             ]
         );
         $this->orderRepository->firstOrCreate(
@@ -75,7 +75,7 @@ class OrderSeeder extends Seeder
                 'order_number' => '100005',
                 'vendor_id' => 3,
                 'delivery_time' => 60,
-                'order_date' => now(),
+                'order_date' => now()->sub('70 minute'),
             ]
         );
     }

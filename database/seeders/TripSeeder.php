@@ -44,7 +44,13 @@ class TripSeeder extends Seeder
                 'courier_id' => 1,
                 'status' => TripStatusEnum::DELIVERED->value,
                 'event_time' => now()->sub('10 minute'),
-            ]
+            ],
+            [
+                'order_id' => 4,
+                'courier_id' => 1,
+                'status' => TripStatusEnum::ASSIGNED->value,
+                'event_time' => now()->sub('20 minute'),
+            ],
         ];
         foreach ($order1_trips as $tripInfo){
             $this->tripRepository->firstOrCreate(

@@ -42,6 +42,15 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
         vendors.id,
 	    vendors.name,
 
+        sum(TIMESTAMPDIFF(SECOND, DATE_ADD( order_date, INTERVAL delivery_time MINUTE ),
+	    (case WHEN
+	    DATE_ADD( order_date, INTERVAL delivery_time MINUTE ) < NOW() and trips.event_time is NULL
+	    then NOW()
+	    ELSE
+	    	trips.event_time
+	    END)
+	    )) as delay_in_second,
+
 	    SEC_TO_TIME(sum(TIMESTAMPDIFF(SECOND, DATE_ADD( order_date, INTERVAL delivery_time MINUTE ),
 	    (case WHEN
 	    DATE_ADD( order_date, INTERVAL delivery_time MINUTE ) < NOW() and trips.event_time is NULL

@@ -52,15 +52,15 @@ class DelayReportService
 
         if (!$trip || $trip[TripStatusEnum::DELIVERED->value]) {
            $lastRequestOfOrderInQueue = $this->delayReportRepository->lastRequestOfOrderInQueue($orderId);
-           if($lastRequestOfOrderInQueue['id'] && $lastRequestOfOrderInQueue['status'] != DelayReportStatusEnum::CHECKED->value){  //if status is null or PENDING
-             return [
+           if(!$lastRequestOfOrderInQueue || $lastRequestOfOrderInQueue['status'] == DelayReportStatusEnum::CHECKED->value){
+               $success = true;
+               $message = __('userMessage.delayed.submit_request_in_queue');
+           } else {
+               return [
                    'success' => true,
                    'data' => null,
                    'message' => __('userMessage.delayed.duplicate_request')
                ];
-           } else {
-               $success = true;
-               $message = __('userMessage.delayed.submit_request_in_queue');
            }
 
         }

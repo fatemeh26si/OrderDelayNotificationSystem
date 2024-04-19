@@ -31,6 +31,10 @@ class AgentSeeder extends Seeder
                 'agent_number'=> 100003,
                 'name'=> 'علی اکبری',
             ],
+            [
+                'agent_number'=> 100004,
+                'name'=> 'صدرا اکبری',
+            ],
         ];
         foreach ($agents as $agent){
             $this->agentRepository->firstOrCreate(

@@ -14,12 +14,14 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->string('order_number');
-            $table->bigInteger('vendor_id');
+            $table->unsignedBigInteger('vendor_id');
             $table->integer('delivery_time');
             $table->timestamp('order_date');
             $table->timestamp('delivered_date')->nullable();
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('vendor_id')->references('id')->on('vendors')->restrictOnDelete();
         });
     }
 

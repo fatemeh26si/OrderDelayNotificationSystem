@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Enums\TripStatusEnum;
 
 return new class extends Migration
 {
@@ -13,12 +14,20 @@ return new class extends Migration
     {
         Schema::create('trips', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('order_id');
-            $table->bigInteger('courier_id');
-            $table->string('status');
+            $table->unsignedBigInteger('order_id');
+            $table->unsignedBigInteger('courier_id');
+            $table->enum('status', [
+                TripStatusEnum::ASSIGNED->value,
+                TripStatusEnum::AT_VENDOR->value,
+                TripStatusEnum::PICKED->value,
+                TripStatusEnum::DELIVERED->value,
+                ]);
             $table->timestamp('event_time');
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('order_id')->references('id')->on('orders')->restrictOnDelete();
+            $table->foreign('courier_id')->references('id')->on('couriers')->restrictOnDelete();
         });
     }
 
